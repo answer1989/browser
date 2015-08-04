@@ -3,5 +3,10 @@
 
     <string name="app_name">browser</string>
     <string name="hello_world">Hello world!</string>
-
+    <string name="title_activity_web_browser">WebBrowserActivity</string>
+	<string name="edit_text_input_website">Input url here</string>
+	<string name="button_text_previous">pre</string>
+	<string name="button_text_next">next</string>
+	<string name="button_text_bookmark">mark</string>
+	<string name="button_text_new_tab">new</string>
 </resources>

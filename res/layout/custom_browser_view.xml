@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     >
+     
+    <LinearLayout
+        android:id="@+id/linear_layout_website"
+        android:layout_width="match_parent" 
+        android:layout_height="@dimen/linear_layout_website_height"
+        android:orientation="horizontal"
+        >
+        <EditText
+            android:id="@+id/edit_text_website"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:hint="@string/edit_text_input_website"
+            android:layout_weight="3"
+        />
+        <Button
+            android:id="@+id/button_load_website"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+    
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/linear_layout_website"
+        />
+
+</RelativeLayout>

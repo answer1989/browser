@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+   <view.BrowserView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       />
+   
+   <LinearLayout 
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_alignParentBottom="true"
+       >
+       <Button 
+           android:id="@+id/button_go_previous_page"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:text="@string/button_text_previous"
+           android:layout_weight="1"
+           />
+       
+       <Button 
+           android:id="@+id/button_go_next_page"
+           android:layout_width="0dp" 
+           android:layout_height="wrap_content"
+           android:text="@string/button_text_next"
+            android:layout_weight="1"
+           />
+       
+       <Button 
+           android:id="@+id/button_bookmark"
+           android:layout_width="0dp" 
+           android:layout_height="wrap_content"
+           android:text="@string/button_text_bookmark"
+            android:layout_weight="1"
+           />
+       
+       <Button 
+           android:id="@+id/button_new_tab"
+           android:layout_width="0dp" 
+           android:layout_height="wrap_content"
+           android:text="@string/button_text_new_tab"
+            android:layout_weight="1"
+           />
+   </LinearLayout>
+
+</RelativeLayout>
