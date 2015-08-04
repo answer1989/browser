@@ -5,11 +5,14 @@
     tools:context="${relativePackage}.${activityClass}" >
 
    <view.BrowserView
+       android:id="@+id/browser_view"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
+       android:layout_above="@+id/linear_layout_bottom_bar"
        />
    
    <LinearLayout 
+       android:id="@+id/linear_layout_bottom_bar"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:orientation="horizontal"
@@ -32,7 +35,7 @@
            />
        
        <Button 
-           android:id="@+id/button_bookmark"
+           android:id="@+id/button_add_bookmark"
            android:layout_width="0dp" 
            android:layout_height="wrap_content"
            android:text="@string/button_text_bookmark"

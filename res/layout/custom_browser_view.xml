@@ -15,17 +15,22 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:hint="@string/edit_text_input_website"
+            android:inputType="textNoSuggestions"
+            android:singleLine="true"
+            android:imeOptions="actionGo"
             android:layout_weight="3"
         />
         <Button
-            android:id="@+id/button_load_website"
+            android:id="@+id/button_refresh_website"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:text="@string/button_refresh_website"
             />
     </LinearLayout>
     
     <WebView
+        android:id="@+id/web_view_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/linear_layout_website"

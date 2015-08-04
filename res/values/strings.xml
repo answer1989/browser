@@ -9,4 +9,5 @@
 	<string name="button_text_next">next</string>
 	<string name="button_text_bookmark">mark</string>
 	<string name="button_text_new_tab">new</string>
+	<string name="button_refresh_website">Refresh</string>
 </resources>
