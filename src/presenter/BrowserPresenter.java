@@ -40,4 +40,12 @@ public class BrowserPresenter {
 		mBrowserView.goNextPage();
 	}
 
+	public void showLoadingProgress(int progress) {
+		mBrowserView.setProgress(progress);
+		if (progress >= 100 || progress <= 0) {
+			mBrowserView.hideProgress();
+		} else {
+			mBrowserView.showProgress();
+		}
+	}
 }

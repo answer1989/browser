@@ -1,7 +1,5 @@
 package view;
 
-import org.apache.commons.validator.util.ValidatorUtils;
-
 import presenter.BrowserPresenter;
 import utils.Utils;
 
@@ -13,6 +11,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -27,11 +26,11 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 	private EditText mEdittextWebsite;
 	private Button mButtonRefreshWebsite;
 	private WebView mWebViewContent;
+	private ProgressBarView mProgressBarView;
 	private BrowserPresenter mBrowserPresenter;
 
 	public BrowserView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		// TODO Auto-generated constructor stub
 		LayoutInflater.from(context)
 				.inflate(R.layout.custom_browser_view, this);
 
@@ -42,7 +41,7 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 		setUpButton();
 
 		setUpWebView();
-		
+
 		mBrowserPresenter = new BrowserPresenter(this);
 	}
 
@@ -50,6 +49,7 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 		mEdittextWebsite = (EditText) findViewById(R.id.edit_text_website);
 		mButtonRefreshWebsite = (Button) findViewById(R.id.button_refresh_website);
 		mWebViewContent = (WebView) findViewById(R.id.web_view_content);
+		mProgressBarView = (ProgressBarView) findViewById(R.id.progress_bar_view);
 	}
 
 	private void setUpWebView() {
@@ -70,6 +70,14 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 			}
 		});
 
+		mWebViewContent.setWebChromeClient(new WebChromeClient() {
+			@Override
+			public void onProgressChanged(WebView view, int newProgress) {
+				super.onProgressChanged(view, newProgress);
+				mBrowserPresenter.showLoadingProgress(newProgress);
+			}
+		});
+
 	}
 
 	private void setUpButton() {
@@ -78,7 +86,8 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 
 			@Override
 			public void onClick(View v) {
-				mBrowserPresenter.reloadWebsite(mEdittextWebsite.getText().toString());
+				mBrowserPresenter.reloadWebsite(mEdittextWebsite.getText()
+						.toString());
 			}
 		});
 
@@ -94,7 +103,8 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 							KeyEvent event) {
 						if (actionId == EditorInfo.IME_ACTION_GO) {
 							Utils.hideKeyBoard(getWindowToken(), getContext());
-							mBrowserPresenter.loadWebsite(mEdittextWebsite.getText().toString());
+							mBrowserPresenter.loadWebsite(mEdittextWebsite
+									.getText().toString());
 							return true;
 						}
 						return false;
@@ -102,7 +112,6 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 				});
 
 	}
-
 
 	@Override
 	public void goPreviousPage() {
@@ -113,7 +122,6 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 	public void goNextPage() {
 		mWebViewContent.goForward();
 	}
-
 
 	@Override
 	public void loadWebsite(String website) {
@@ -133,5 +141,22 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 	@Override
 	public boolean canGoNextPage() {
 		return mWebViewContent.canGoForward();
+	}
+
+	@Override
+	public void setProgress(int progress) {
+		mProgressBarView.setProgress(progress);
+	}
+
+	@Override
+	public void showProgress() {
+		if (mProgressBarView.getVisibility() != VISIBLE) {
+			mProgressBarView.setVisibility(VISIBLE);
+		}
+	}
+
+	@Override
+	public void hideProgress() {
+		mProgressBarView.setVisibility(GONE);
 	}
 }
