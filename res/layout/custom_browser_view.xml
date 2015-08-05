@@ -5,7 +5,7 @@
     android:layout_height="match_parent" >
 
     <LinearLayout
-        android:id="@+id/linear_layout_website"
+        android:id="@+id/linear_layout_website_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/linear_layout_website_height"
         android:orientation="horizontal" >
@@ -32,14 +32,14 @@
         android:id="@+id/progress_bar_view"
         android:layout_width="match_parent"
         android:layout_height="3dp"
-        android:layout_below="@id/linear_layout_website"
+        android:layout_below="@id/linear_layout_website_bar"
         pgb:progress_color="@color/progress_color"
         android:visibility="invisible" />
 
-    <WebView
+   <view.CustomWebView
         android:id="@+id/web_view_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/progress_bar_view" />
 
 </RelativeLayout>

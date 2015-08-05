@@ -1,7 +1,5 @@
 package view;
 
-import com.example.browser.R;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -9,8 +7,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
+
+import com.example.browser.R;
 
 public class ProgressBarView extends View {
 
