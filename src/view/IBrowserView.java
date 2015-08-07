@@ -1,5 +1,7 @@
 package view;
 
+import model.Bookmark;
+
 public interface IBrowserView {
 
 	public void loadWebsite(String website);
@@ -19,5 +21,9 @@ public interface IBrowserView {
 	public boolean canGoPreviousPage();
 	
 	public boolean canGoNextPage();
+	
+	public void showBookmarkExist(Bookmark bookmark);
+	
+	public void showBookmarkAddSuccess();
 	
 }

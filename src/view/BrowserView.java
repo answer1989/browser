@@ -1,5 +1,6 @@
 package view;
 
+import model.Bookmark;
 import presenter.BrowserPresenter;
 import utils.Utils;
 
@@ -7,7 +8,10 @@ import com.example.browser.R;
 
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -28,10 +32,11 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 
 	private EditText mEdittextWebsite;
 	private Button mButtonRefreshWebsite;
+	private Button mButtonAddBookMark;
 	private CustomWebView mWebViewContent;
 	private ProgressBarView mProgressBarView;
 	private BrowserPresenter mBrowserPresenter;
-	private LinearLayout mLinearLayoutWebsiteBar;
+	private RelativeLayout mRelativeLayoutWebsiteBar;
 
 	private final static int ANIMATION_DISTANCE = 80;
 	private boolean mIsWebsiteBarVisible = true;
@@ -55,9 +60,10 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 	private void initView() {
 		mEdittextWebsite = (EditText) findViewById(R.id.edit_text_website);
 		mButtonRefreshWebsite = (Button) findViewById(R.id.button_refresh_website);
+		mButtonAddBookMark = (Button)findViewById(R.id.button_add_bookmark);
 		mWebViewContent = (CustomWebView) findViewById(R.id.web_view_content);
 		mProgressBarView = (ProgressBarView) findViewById(R.id.progress_bar_view);
-		mLinearLayoutWebsiteBar = (LinearLayout) findViewById(R.id.linear_layout_website_bar);
+		mRelativeLayoutWebsiteBar = (RelativeLayout) findViewById(R.id.relative_layout_website_bar);
 	}
 
 	private void setUpWebView() {
@@ -75,6 +81,13 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 				Toast.makeText(getContext(), description, Toast.LENGTH_SHORT)
 						.show();
 			}
+			
+			@Override
+			public void onPageStarted(WebView view, String url, Bitmap favicon) {
+				// TODO Auto-generated method stub
+				super.onPageStarted(view, url, favicon);
+				mEdittextWebsite.setText(url);
+			}
 		});
 
 		mWebViewContent.setWebChromeClient(new WebChromeClient() {
@@ -83,6 +96,7 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 				super.onProgressChanged(view, newProgress);
 				mBrowserPresenter.showLoadingProgress(newProgress);
 			}
+			
 		});
 
 		mWebViewContent.setOnScrollChangeListener(new OnScrollChangeListener() {
@@ -110,7 +124,7 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 	}
 
 	private void animateHideWebsiteBar() {
-		makeMarginValueAnimator(-mLinearLayoutWebsiteBar.getHeight()).start();
+		makeMarginValueAnimator(-mRelativeLayoutWebsiteBar.getHeight()).start();
 	}
 
 	private ValueAnimator makeMarginValueAnimator(int finalValue) {
@@ -120,10 +134,10 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 
 			@Override
 			public void onAnimationUpdate(ValueAnimator animation) {
-				RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) mLinearLayoutWebsiteBar
+				RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) mRelativeLayoutWebsiteBar
 						.getLayoutParams();
 				lp.setMargins(0, (Integer) animation.getAnimatedValue(), 0, 0);
-				mLinearLayoutWebsiteBar.setLayoutParams(lp);
+				mRelativeLayoutWebsiteBar.setLayoutParams(lp);
 			}
 		});
 
@@ -138,6 +152,14 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 			public void onClick(View v) {
 				mBrowserPresenter.reloadWebsite(mEdittextWebsite.getText()
 						.toString());
+			}
+		});
+		
+		mButtonAddBookMark.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mBrowserPresenter.addBookmark(mWebViewContent.getTitle(), mWebViewContent.getUrl());
 			}
 		});
 
@@ -209,4 +231,39 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 	public void hideProgress() {
 		mProgressBarView.setVisibility(GONE);
 	}
+
+	@Override
+	public void showBookmarkExist(Bookmark bookmark) {
+		final AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+				.setMessage(R.string.alert_bookmark_exist).create();
+
+		alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getContext()
+				.getString(R.string.cancel),
+				new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						alertDialog.dismiss();
+					}
+				});
+
+		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, getContext()
+				.getString(R.string.confirm),
+				new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						mBrowserPresenter.replaceBookmark(mWebViewContent.getTitle(), mWebViewContent.getUrl());
+					}
+				});
+
+		alertDialog.show();
+	}
+
+	@Override
+	public void showBookmarkAddSuccess() {
+		Toast.makeText(getContext(), R.string.add_bookmark_success, Toast.LENGTH_SHORT).show();
+
+	}
+
 }

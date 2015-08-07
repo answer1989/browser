@@ -10,4 +10,9 @@
 	<string name="button_text_bookmark">mark</string>
 	<string name="button_text_new_tab">new</string>
 	<string name="button_refresh_website">Refresh</string>
+	<string name="button_add_bookmark">Add</string>
+	<string name="alert_bookmark_exist">Bookmark exist, do you want to replace it?</string>
+	<string name="confirm">Confirm</string>
+	<string name="cancel">Cancel</string>
+	<string name="add_bookmark_success">Add bookmark success</string>
 </resources>

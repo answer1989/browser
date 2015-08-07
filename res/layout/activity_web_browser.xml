@@ -35,7 +35,7 @@
            />
        
        <Button 
-           android:id="@+id/button_add_bookmark"
+           android:id="@+id/button_go_bookmark"
            android:layout_width="0dp" 
            android:layout_height="wrap_content"
            android:text="@string/button_text_bookmark"

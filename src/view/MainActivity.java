@@ -1,13 +1,14 @@
 package view;
 
-import com.example.browser.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class WebBrowserActivity extends Activity implements OnClickListener {
+import com.example.browser.R;
+
+public class MainActivity extends Activity implements OnClickListener{
 
 	private IBrowserView mBrowserView;
 	private Button mButtonGoPreviousPage;
@@ -23,6 +24,7 @@ public class WebBrowserActivity extends Activity implements OnClickListener {
 		initView();
 
 		setUpButtonListener();
+
 	}
 
 	private void setUpButtonListener() {
@@ -36,7 +38,7 @@ public class WebBrowserActivity extends Activity implements OnClickListener {
 		mBrowserView = (IBrowserView) findViewById(R.id.browser_view);
 		mButtonGoPreviousPage = (Button) findViewById(R.id.button_go_previous_page);
 		mButtonGoNextPage = (Button) findViewById(R.id.button_go_next_page);
-		mButtonAddBookMark = (Button) findViewById(R.id.button_add_bookmark);
+		mButtonAddBookMark = (Button) findViewById(R.id.button_go_bookmark);
 		mButtonAddNewTab = (Button) findViewById(R.id.button_new_tab);
 	}
 
@@ -51,13 +53,14 @@ public class WebBrowserActivity extends Activity implements OnClickListener {
 			goNextPage();
 			break;
 
-		case R.id.button_add_bookmark:
-			addBookMark();
+		case R.id.button_go_bookmark:
+			goToBookMark();
 			break;
 
 		case R.id.button_new_tab:
 			switchNewTab();
 			break;
+			
 		default:
 			break;
 		}
@@ -72,8 +75,8 @@ public class WebBrowserActivity extends Activity implements OnClickListener {
 		mBrowserView.goNextPage();
 	}
 
-	private void addBookMark() {
-
+	private void goToBookMark() {
+		
 	}
 
 	private void switchNewTab() {
