@@ -66,8 +66,7 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 		mWebViewContent.setWebViewClient(new WebViewClient() {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				mWebViewContent.loadUrl(url);
-				return true;
+				return false;
 			}
 
 			@Override
