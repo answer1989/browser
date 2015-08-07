@@ -3,9 +3,6 @@ package view;
 import model.Bookmark;
 import presenter.BrowserPresenter;
 import utils.Utils;
-
-import com.example.browser.R;
-
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.app.AlertDialog;
@@ -22,11 +19,12 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.TextView.OnEditorActionListener;
+import android.widget.Toast;
+
+import com.example.browser.R;
 
 public class BrowserView extends RelativeLayout implements IBrowserView {
 

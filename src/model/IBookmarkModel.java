@@ -7,9 +7,9 @@ public interface IBookmarkModel {
 	
 	public boolean isBookmarkExist(String website);
 	
-	public void deleteBookmark(int bookmarkId);
+	public void deleteBookmark(long bookmarkId);
 	
-	public List<Bookmark> getlimitedSizeBookMark(int fromId, int size);
+	public List<Bookmark> getlimitedSizeBookMark(long fromId, int size);
 	
 	public void saveBookmark(Bookmark bookmark);
 	

@@ -7,11 +7,11 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-public class BookMarkModel implements IBookmarkModel {
+public class BookmarkModel implements IBookmarkModel {
 
 	private SQLiteDatabase mSqLiteDatabase;
 
-	public BookMarkModel() {
+	public BookmarkModel() {
 		mSqLiteDatabase = BrowserDatabaseHelper.getInstance()
 				.getWritableDatabase();
 	}
@@ -32,14 +32,14 @@ public class BookMarkModel implements IBookmarkModel {
 	}
 
 	@Override
-	public void deleteBookmark(int bookmarkId) {
+	public void deleteBookmark(long bookmarkId) {
 		String selection = Bookmark._ID + " = ?";
 		String args[] = { String.valueOf(bookmarkId) };
 		mSqLiteDatabase.delete(Bookmark.TABLE_NAME, selection, args);
 	}
 
 	@Override
-	public List<Bookmark> getlimitedSizeBookMark(int fromId, int size) {
+	public List<Bookmark> getlimitedSizeBookMark(long fromId, int size) {
 		List<Bookmark> bookmarkList = new ArrayList<Bookmark>();
 
 		String projection[] = { Bookmark._ID, Bookmark.COLUMN_NAME_TITLE,

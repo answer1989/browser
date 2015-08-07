@@ -4,15 +4,18 @@
     <string name="app_name">browser</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_web_browser">WebBrowserActivity</string>
-	<string name="edit_text_input_website">Input url here</string>
-	<string name="button_text_previous">pre</string>
-	<string name="button_text_next">next</string>
-	<string name="button_text_bookmark">mark</string>
-	<string name="button_text_new_tab">new</string>
-	<string name="button_refresh_website">Refresh</string>
-	<string name="button_add_bookmark">Add</string>
-	<string name="alert_bookmark_exist">Bookmark exist, do you want to replace it?</string>
-	<string name="confirm">Confirm</string>
-	<string name="cancel">Cancel</string>
-	<string name="add_bookmark_success">Add bookmark success</string>
+    <string name="edit_text_input_website">Input url here</string>
+    <string name="button_text_previous">pre</string>
+    <string name="button_text_next">next</string>
+    <string name="button_text_bookmark">mark</string>
+    <string name="button_text_new_tab">new</string>
+    <string name="button_refresh_website">Refresh</string>
+    <string name="button_add_bookmark">Add</string>
+    <string name="alert_bookmark_exist">Bookmark exist, do you want to replace it?</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="add_bookmark_success">Add bookmark success</string>
+    <string name="title_activity_bookmark">BookmarkActivity</string>
+    <string name="delete">delete</string>
+
 </resources>

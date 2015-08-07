@@ -1,6 +1,7 @@
 package view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,6 +16,8 @@ public class MainActivity extends Activity implements OnClickListener{
 	private Button mButtonGoNextPage;
 	private Button mButtonAddBookMark;
 	private Button mButtonAddNewTab;
+	
+	private final static int OPEN_BOOKMARK_CODE = 0x1000;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +79,9 @@ public class MainActivity extends Activity implements OnClickListener{
 	}
 
 	private void goToBookMark() {
-		
+		Intent intent = new Intent();
+		intent.setClass(this, BookmarkActivity.class);
+		startActivityForResult(intent, OPEN_BOOKMARK_CODE);
 	}
 
 	private void switchNewTab() {
@@ -89,6 +94,15 @@ public class MainActivity extends Activity implements OnClickListener{
 			mBrowserView.goPreviousPage();
 		} else {
 			super.onBackPressed();
+		}
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(requestCode == OPEN_BOOKMARK_CODE && resultCode == RESULT_OK){
+			String bookmark = data.getStringExtra(BookmarkActivity.OPEN_BOOK_MARK);
+			mBrowserView.loadWebsite(bookmark);
 		}
 	}
 
