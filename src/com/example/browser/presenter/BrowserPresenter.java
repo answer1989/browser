@@ -1,12 +1,14 @@
-package presenter;
+package com.example.browser.presenter;
 
 import java.util.Locale;
 
-import model.Bookmark;
-import model.BookmarkModel;
-import model.IBookmarkModel;
-import utils.Utils;
-import view.IBrowserView;
+import com.example.browser.model.BookmarkModel;
+import com.example.browser.model.IBookmarkModel;
+import com.example.browser.model.bean.Bookmark;
+import com.example.browser.util.Utils;
+import com.example.browser.view.custom.IBrowserView;
+
+
 import android.text.TextUtils;
 
 public class BrowserPresenter {

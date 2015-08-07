@@ -1,4 +1,4 @@
-package view;
+package com.example.browser.view.custom;
 
 import android.webkit.WebView;
 

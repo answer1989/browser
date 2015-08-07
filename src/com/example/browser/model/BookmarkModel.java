@@ -1,7 +1,11 @@
-package model;
+package com.example.browser.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.browser.model.bean.Bookmark;
+
+
 
 import android.content.ContentValues;
 import android.database.Cursor;

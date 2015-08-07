@@ -1,6 +1,10 @@
-package model;
+package com.example.browser.model;
 
 import java.util.List;
+
+import com.example.browser.model.bean.Bookmark;
+
+
 
 
 public interface IBookmarkModel {

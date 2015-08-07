@@ -1,4 +1,7 @@
-package model;
+package com.example.browser.model;
+
+
+import com.example.browser.model.bean.Bookmark;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

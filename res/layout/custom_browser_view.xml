@@ -36,7 +36,7 @@
             android:singleLine="true" />
     </RelativeLayout>
 
-    <view.ProgressBarView
+    <com.example.browser.view.custom.ProgressBarView
         android:id="@+id/progress_bar_view"
         android:layout_width="match_parent"
         android:layout_height="3dp"
@@ -44,7 +44,7 @@
         android:visibility="invisible"
         pgb:progress_color="@color/progress_color" />
 
-    <view.CustomWebView
+    <com.example.browser.view.custom.CustomWebView
         android:id="@+id/web_view_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

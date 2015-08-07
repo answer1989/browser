@@ -1,4 +1,4 @@
-package view;
+package com.example.browser.view.main;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +8,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.example.browser.R;
+import com.example.browser.view.bookmark.BookmarkActivity;
+import com.example.browser.view.custom.IBrowserView;
 
 public class MainActivity extends Activity implements OnClickListener{
 

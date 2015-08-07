@@ -1,9 +1,8 @@
-package view;
+package com.example.browser.view.bookmark;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Bookmark;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.browser.R;
+import com.example.browser.model.bean.Bookmark;
 
 public class BookmarkAdapter extends BaseAdapter{
 

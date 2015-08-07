@@ -1,6 +1,7 @@
-package com.example.browser;
+package com.example.browser.base;
 
-import model.BrowserDatabaseHelper;
+import com.example.browser.model.BrowserDatabaseHelper;
+
 import android.app.Application;
 
 public class BrowserApplication extends Application{

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
-   <view.BrowserView
+   <com.example.browser.view.custom.BrowserView
        android:id="@+id/browser_view"
        android:layout_width="match_parent"
        android:layout_height="match_parent"

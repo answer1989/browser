@@ -1,6 +1,6 @@
-package view;
+package com.example.browser.view.bookmark;
 
-import model.Bookmark;
+import com.example.browser.model.bean.Bookmark;
 
 public interface OnBookmarkDeleteListener {
 

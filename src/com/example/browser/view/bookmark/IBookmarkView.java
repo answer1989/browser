@@ -1,8 +1,10 @@
-package view;
+package com.example.browser.view.bookmark;
 
 import java.util.List;
 
-import model.Bookmark;
+import com.example.browser.model.bean.Bookmark;
+
+
 
 public interface IBookmarkView {
 	public void loadBookmark(List<Bookmark> bookmarks);

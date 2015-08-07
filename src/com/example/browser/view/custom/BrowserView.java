@@ -1,8 +1,5 @@
-package view;
+package com.example.browser.view.custom;
 
-import model.Bookmark;
-import presenter.BrowserPresenter;
-import utils.Utils;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.app.AlertDialog;
@@ -25,6 +22,9 @@ import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 import com.example.browser.R;
+import com.example.browser.model.bean.Bookmark;
+import com.example.browser.presenter.BrowserPresenter;
+import com.example.browser.util.Utils;
 
 public class BrowserView extends RelativeLayout implements IBrowserView {
 

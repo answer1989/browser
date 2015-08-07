@@ -1,6 +1,6 @@
-package view;
+package com.example.browser.view.custom;
 
-import model.Bookmark;
+import com.example.browser.model.bean.Bookmark;
 
 public interface IBrowserView {
 

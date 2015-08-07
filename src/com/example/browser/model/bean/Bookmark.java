@@ -1,4 +1,4 @@
-package model;
+package com.example.browser.model.bean;
 
 import android.provider.BaseColumns;
 

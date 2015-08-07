@@ -1,9 +1,7 @@
-package view;
+package com.example.browser.view.bookmark;
 
 import java.util.List;
 
-import model.Bookmark;
-import presenter.BookmarkPresenter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +13,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.example.browser.R;
+import com.example.browser.model.bean.Bookmark;
+import com.example.browser.presenter.BookmarkPresenter;
 
 public class BookmarkActivity extends Activity implements IBookmarkView {
 

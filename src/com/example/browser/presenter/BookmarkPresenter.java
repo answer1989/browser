@@ -1,10 +1,12 @@
-package presenter;
+package com.example.browser.presenter;
 
 import java.util.List;
 
-import view.IBookmarkView;
-import model.Bookmark;
-import model.BookmarkModel;
+import com.example.browser.model.BookmarkModel;
+import com.example.browser.model.bean.Bookmark;
+import com.example.browser.view.bookmark.IBookmarkView;
+
+
 
 public class BookmarkPresenter {
 	private BookmarkModel mBookMarkModel;

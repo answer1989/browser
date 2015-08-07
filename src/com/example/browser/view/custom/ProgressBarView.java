@@ -1,4 +1,4 @@
-package view;
+package com.example.browser.view.custom;
 
 import android.content.Context;
 import android.content.res.TypedArray;

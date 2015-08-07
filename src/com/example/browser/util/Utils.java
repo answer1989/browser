@@ -1,4 +1,4 @@
-package utils;
+package com.example.browser.util;
 
 import org.apache.commons.validator.routines.UrlValidator;
 
