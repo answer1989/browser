@@ -105,11 +105,11 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 				int dy = y - oldY;
 
 				if (dy > ANIMATION_DISTANCE && mIsWebsiteBarVisible) {
-					animateHideWebsiteBar();
 					mIsWebsiteBarVisible = false;
+					animateHideWebsiteBar();
 				} else if (dy < -ANIMATION_DISTANCE && !mIsWebsiteBarVisible) {
-					animateShowWebsiteBar();
 					mIsWebsiteBarVisible = true;
+					animateShowWebsiteBar();
 				}
 
 			}
