@@ -4,76 +4,54 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
-   <LinearLayout
-       android:id="@+id/linear_layout_web_view_container"
-       android:orientation="vertical"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:layout_above="@+id/linear_layout_bottom_bar"
-       />
-   
-   <LinearLayout 
-       android:id="@+id/linear_layout_tab"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="vertical"
-       android:background="@android:color/white"
-       android:layout_above="@+id/linear_layout_bottom_bar"
-       android:visibility="gone"
-       >
-       <ListView 
-           android:id="@+id/list_view_tabs"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:descendantFocusability="blocksDescendants"
-           />
-       <Button 
-           android:id="@+id/button_new_tab"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_gravity="center_horizontal"
-           android:text="@string/new_tab"
-           />
-   </LinearLayout>
-   
-   <LinearLayout 
-       android:id="@+id/linear_layout_bottom_bar"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="horizontal"
-       android:layout_alignParentBottom="true"
-       >
-       <Button 
-           android:id="@+id/button_go_previous_page"
-           android:layout_width="0dp"
-           android:layout_height="wrap_content"
-           android:text="@string/button_text_previous"
-           android:layout_weight="1"
-           />
-       
-       <Button 
-           android:id="@+id/button_go_next_page"
-           android:layout_width="0dp" 
-           android:layout_height="wrap_content"
-           android:text="@string/button_text_next"
+    <LinearLayout
+        android:id="@+id/linear_layout_web_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/linear_layout_bottom_bar"
+        android:orientation="vertical" />
+
+    <com.example.browser.view.main.TabsView
+        android:id="@+id/custom_tabs_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/linear_layout_bottom_bar"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/linear_layout_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/button_go_previous_page"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-           />
-       
-       <Button 
-           android:id="@+id/button_go_bookmark"
-           android:layout_width="0dp" 
-           android:layout_height="wrap_content"
-           android:text="@string/button_text_bookmark"
+            android:text="@string/button_text_previous" />
+
+        <Button
+            android:id="@+id/button_go_next_page"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-           />
-       
-       <Button 
-           android:id="@+id/button_tab"
-           android:layout_width="0dp" 
-           android:layout_height="wrap_content"
-           android:text="@string/button_text_new_tab"
+            android:text="@string/button_text_next" />
+
+        <Button
+            android:id="@+id/button_go_bookmark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-           />
-   </LinearLayout>
+            android:text="@string/button_text_bookmark" />
+
+        <Button
+            android:id="@+id/button_tab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/button_text_new_tab" />
+    </LinearLayout>
 
 </RelativeLayout>

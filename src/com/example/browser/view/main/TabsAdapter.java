@@ -2,9 +2,6 @@ package com.example.browser.view.main;
 
 import java.util.List;
 
-import com.example.browser.R;
-import com.example.browser.view.custom.BrowserView;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,29 +10,34 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.browser.R;
+import com.example.browser.view.custom.BrowserView;
 
 public class TabsAdapter extends BaseAdapter {
 
 	private List<BrowserView> mTabs;
 	private Context mContext;
 	private LayoutInflater mLayoutInflater;
-	private OnTabCloseListener mOnTabCloseListener;
+	private OnTabChangeListener mOnTabCloseListener;
 
-	TabsAdapter(List<BrowserView> tabs, Context context) {
-		mTabs = tabs;
+	TabsAdapter(Context context) {
 		mContext = context.getApplicationContext();
 		mLayoutInflater = LayoutInflater.from(mContext);
 	}
 	
+	public void setTabs(List<BrowserView> tabs){
+		mTabs = tabs;
+	} 
 	
-	public void setOnTabCloseListener(OnTabCloseListener onTabCloseListener){
+	
+	public void setOnTabCloseListener(OnTabChangeListener onTabCloseListener){
 		mOnTabCloseListener = onTabCloseListener;
 	}
 
 	@Override
 	public int getCount() {
-		return mTabs.size();
+		return mTabs == null ? 0 : mTabs.size();
 	}
 
 	@Override
@@ -73,7 +75,7 @@ public class TabsAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				if(mOnTabCloseListener != null){
-					mOnTabCloseListener.onItemClose(position);
+					mOnTabCloseListener.onTabClose(position);
 				}
 			}
 		});

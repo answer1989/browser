@@ -12,18 +12,14 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.browser.R;
-import com.example.browser.R.layout;
 import com.example.browser.view.bookmark.BookmarkActivity;
 import com.example.browser.view.custom.BrowserView;
-import com.example.browser.view.custom.IBrowserView;
 
-public class MainActivity extends Activity implements OnClickListener, OnTabCloseListener{
+public class MainActivity extends Activity implements OnClickListener, OnTabChangeListener{
 
 	private BrowserView mCurrentBrowserView;
 	private Button mButtonGoPreviousPage;
@@ -31,11 +27,7 @@ public class MainActivity extends Activity implements OnClickListener, OnTabClos
 	private Button mButtonAddBookMark;
 	private Button mButtonTab;
 	private LinearLayout mLinearLayoutWebViewContainer;
-	private LinearLayout mLinearLayoutTabs;
-	private ListView mListViewTabsList;
-	private TabsAdapter mTabsAdapter;
-	private Button mButtonNewTab;
-	
+	private TabsView mTabsView;
 	private List<BrowserView> mBrowserViews = new ArrayList<BrowserView>();
 	
 	private final static int MAX_TAB = 10;
@@ -57,7 +49,6 @@ public class MainActivity extends Activity implements OnClickListener, OnTabClos
 		mButtonGoNextPage.setOnClickListener(this);
 		mButtonAddBookMark.setOnClickListener(this);
 		mButtonTab.setOnClickListener(this);
-		mButtonNewTab.setOnClickListener(this);
 	}
 
 	private void initView() {
@@ -72,22 +63,9 @@ public class MainActivity extends Activity implements OnClickListener, OnTabClos
 		mButtonGoNextPage = (Button) findViewById(R.id.button_go_next_page);
 		mButtonAddBookMark = (Button) findViewById(R.id.button_go_bookmark);
 		mButtonTab = (Button) findViewById(R.id.button_tab);
-		mLinearLayoutTabs = (LinearLayout)findViewById(R.id.linear_layout_tab);
-		mButtonNewTab = (Button)findViewById(R.id.button_new_tab);
-		
-		mListViewTabsList = (ListView)findViewById(R.id.list_view_tabs);
-		mTabsAdapter = new TabsAdapter(mBrowserViews,getApplicationContext());
-		mListViewTabsList.setAdapter(mTabsAdapter);
-		
-		mListViewTabsList.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				showWebView(mBrowserViews.get(position));
-			}
-		});
-		mTabsAdapter.setOnTabCloseListener(this);
+		mTabsView = (TabsView)findViewById(R.id.custom_tabs_view);
+		mTabsView.setTabList(mBrowserViews);
+		mTabsView.setOnTabChangeListener(this);
 	}
 
 	@Override
@@ -108,10 +86,6 @@ public class MainActivity extends Activity implements OnClickListener, OnTabClos
 		case R.id.button_tab:
 			showTabList();
 			break;
-		
-		case R.id.button_new_tab:
-			addNewTab();
-			break;
 			
 		default:
 			break;
@@ -125,7 +99,9 @@ public class MainActivity extends Activity implements OnClickListener, OnTabClos
 		}
 		BrowserView browserView = new BrowserView(getApplicationContext());
 		mBrowserViews.add(browserView);
-		mTabsAdapter.notifyDataSetChanged();
+		mTabsView.notifyDataSetChanged();
+		showWebView(browserView);
+		mTabsView.dismiss();
 	}
 
 	private void goPreviousPage() {
@@ -143,11 +119,11 @@ public class MainActivity extends Activity implements OnClickListener, OnTabClos
 	}
 
 	private void showTabList() {
-		if(mLinearLayoutTabs.getVisibility() == View.VISIBLE){
-			mLinearLayoutTabs.setVisibility(View.GONE);
+		if(mTabsView.getVisibility() == View.VISIBLE){
+			mTabsView.dismiss();
 		}else{
-			mTabsAdapter.notifyDataSetChanged();
-			mLinearLayoutTabs.setVisibility(View.VISIBLE);
+			mTabsView.notifyDataSetChanged();
+			mTabsView.show();
 		}
 	}
 	
@@ -159,6 +135,12 @@ public class MainActivity extends Activity implements OnClickListener, OnTabClos
 
 	@Override
 	public void onBackPressed() {
+		
+		if(mTabsView.getVisibility() == View.VISIBLE){
+			mTabsView.dismiss();
+			return;
+		}
+		
 		if (mCurrentBrowserView.canGoPreviousPage()) {
 			mCurrentBrowserView.goPreviousPage();
 		} else {
@@ -176,7 +158,7 @@ public class MainActivity extends Activity implements OnClickListener, OnTabClos
 	}
 
 	@Override
-	public void onItemClose(int position) {
+	public void onTabClose(int position) {
 		if(mBrowserViews.size() == 1){
 			mBrowserViews.remove(position);
 			BrowserView browserView = new BrowserView(getApplicationContext());
@@ -186,7 +168,19 @@ public class MainActivity extends Activity implements OnClickListener, OnTabClos
 			mBrowserViews.remove(position);
 			showWebView(mBrowserViews.get(0));
 		}
-		mTabsAdapter.notifyDataSetChanged();
+		mTabsView.notifyDataSetChanged();
+		mTabsView.dismiss();
+	}
+
+	@Override
+	public void onTabSelected(int position) {
+		mTabsView.dismiss();
+		showWebView(mBrowserViews.get(position));
+	}
+
+	@Override
+	public void onTabAdd() {
+		addNewTab();
 	}
 
 }

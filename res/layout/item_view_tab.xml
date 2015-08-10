@@ -2,41 +2,39 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@android:color/white" 
      >
-    <TextView 
+
+    <TextView
         android:id="@+id/text_view_tab_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:singleLine="true"
-        android:layout_marginRight="@dimen/margin_10"
         android:layout_alignParentLeft="true"
+        android:layout_marginRight="@dimen/margin_10"
         android:layout_toLeftOf="@+id/button_close_tab"
+        android:singleLine="true"
         android:textColor="@android:color/black"
-        android:text="baidu zhidao"
-        />
-    
-    <TextView 
+        android:textSize="15sp" />
+
+    <TextView
         android:id="@+id/text_view_tab_website"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="10sp"
         android:layout_alignParentLeft="true"
-        android:singleLine="true"
-        android:layout_toLeftOf="@+id/button_close_tab"
-        android:layout_marginRight="@dimen/margin_10"
         android:layout_below="@id/text_view_tab_name"
-        android:text="www.baidu.zhidao.com"
-        />
+        android:layout_marginRight="@dimen/margin_10"
+        android:layout_toLeftOf="@+id/button_close_tab"
+        android:singleLine="true"
+        android:textColor="@android:color/black"
+        android:textSize="10sp" />
 
-    <Button 
+    <Button
         android:id="@+id/button_close_tab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:focusable="false"
-        android:text="close"
-        />
+        android:text="close" />
 
 </RelativeLayout>
