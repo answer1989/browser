@@ -20,7 +20,7 @@ public class TabsAdapter extends BaseAdapter {
 	private Context mContext;
 	private LayoutInflater mLayoutInflater;
 	private OnTabChangeListener mOnTabCloseListener;
-
+	
 	TabsAdapter(Context context) {
 		mContext = context.getApplicationContext();
 		mLayoutInflater = LayoutInflater.from(mContext);

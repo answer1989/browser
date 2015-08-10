@@ -2,7 +2,7 @@
 <resources>
 
     <color name="progress_color">#348EC3</color>
-    <color name="transparent_dark">#55000000</color>
+    <color name="transparent_dark">#33000000</color>
     <color name="transparent">#00000000</color>
     <color name="hint_color_gray">#999999</color>
 

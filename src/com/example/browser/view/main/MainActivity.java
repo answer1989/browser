@@ -24,7 +24,6 @@ public class MainActivity extends Activity implements OnClickListener, OnTabChan
 	private Button mButtonAddBookMark;
 	private Button mButtonTab;
 	private LinearLayout mLinearLayoutWebViewContainer;
-	private LinearLayout mLinearLayoutBottombar;
 	private TabsView mTabsView;
 	private List<BrowserView> mBrowserViews = new ArrayList<BrowserView>();
 	
@@ -54,9 +53,7 @@ public class MainActivity extends Activity implements OnClickListener, OnTabChan
 		
 		mLinearLayoutWebViewContainer = (LinearLayout) findViewById(R.id.linear_layout_web_view_container);
 		showWebView(mCurrentBrowserView);
-		
-		mLinearLayoutBottombar = (LinearLayout)findViewById(R.id.linear_layout_bottom_bar);
-		
+				
 		mButtonGoPreviousPage = (Button) findViewById(R.id.button_go_previous_page);
 		mButtonGoNextPage = (Button) findViewById(R.id.button_go_next_page);
 		mButtonAddBookMark = (Button) findViewById(R.id.button_go_bookmark);
@@ -121,7 +118,7 @@ public class MainActivity extends Activity implements OnClickListener, OnTabChan
 			mTabsView.dismiss();
 		}else{
 			mTabsView.notifyDataSetChanged();
-			mTabsView.show(mLinearLayoutBottombar.getHeight());
+			mTabsView.show();
 		}
 	}
 	

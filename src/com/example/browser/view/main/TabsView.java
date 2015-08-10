@@ -3,11 +3,15 @@ package com.example.browser.view.main;
 import java.util.List;
 
 import android.animation.Animator;
-import android.animation.Animator.AnimatorListener;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
+import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewPropertyAnimator;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -26,6 +30,8 @@ public class TabsView extends RelativeLayout {
 	private OnTabChangeListener mOnTabChangeListener;
 	private boolean isShowing = false;
 	private boolean isAnimating = false;
+	private final static int ANIMATION_DISTANCE_DURATION = 150;
+	private final static int ANIMATION_BACKGROUND_DURATION = 60;
 
 	public TabsView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -106,75 +112,96 @@ public class TabsView extends RelativeLayout {
 	}
 
 	public void dismiss() {
-		if(isAnimating){
+		if (isAnimating) {
 			return;
 		}
-		
+
 		isAnimating = true;
 		clearAnimation();
 
-		animate().translationY(getHeight()).setDuration(350)
-				.setInterpolator(new AccelerateDecelerateInterpolator())
-				.setListener(new AnimatorListener() {
+		Integer colorFrom = getResources().getColor(R.color.transparent_dark);
+		Integer colorTo = getResources().getColor(R.color.transparent);
+		ValueAnimator backgroundAnimation = getBackgroundChangeAnimation(
+				colorFrom, colorTo);
 
-					@Override
-					public void onAnimationStart(Animator animation) {
-						setBackgroundResource(R.color.transparent);
-					}
+		backgroundAnimation.addListener(new AnimatorListenerAdapter() {
 
-					@Override
-					public void onAnimationRepeat(Animator animation) {
+			@Override
+			public void onAnimationEnd(Animator animation) {
 
-					}
+				getTranslationYAnimation(getHeight()).setInterpolator(
+						new AccelerateDecelerateInterpolator()).setListener(
+						new AnimatorListenerAdapter() {
 
-					@Override
-					public void onAnimationEnd(Animator animation) {
-						isAnimating = false;
-						isShowing = false;
-					}
+							@Override
+							public void onAnimationEnd(Animator animation) {
+								isAnimating = false;
+								isShowing = false;
+							}
 
-					@Override
-					public void onAnimationCancel(Animator animation) {
+						});
 
-					}
-				});
+			}
+
+		});
+
+		backgroundAnimation.start();
+
 	}
 
-	public void show(int plusDistance) {
-		if(isAnimating){
+	public void show() {
+		if (isAnimating) {
 			return;
 		}
-		
+
 		isAnimating = true;
-		
+
 		clearAnimation();
-		animate().translationY(0).setDuration(350)
-				.setInterpolator(new AccelerateDecelerateInterpolator())
-				.setListener(new AnimatorListener() {
 
-					@Override
-					public void onAnimationStart(Animator animation) {
-						if(getVisibility() != VISIBLE){
-							setVisibility(VISIBLE);
-						}
-					}
+		getTranslationYAnimation(0).setListener(new AnimatorListenerAdapter() {
 
-					@Override
-					public void onAnimationRepeat(Animator animation) {
+			@Override
+			public void onAnimationStart(Animator animation) {
+				if (getVisibility() != VISIBLE) {
+					setVisibility(VISIBLE);
+				}
+			}
 
-					}
+			@Override
+			public void onAnimationEnd(Animator animation) {
+				isAnimating = false;
+				isShowing = true;
+				Integer colorFrom = getResources()
+						.getColor(R.color.transparent);
+				Integer colorTo = getResources().getColor(
+						R.color.transparent_dark);
+				getBackgroundChangeAnimation(colorFrom, colorTo).start();
+			}
 
-					@Override
-					public void onAnimationEnd(Animator animation) {
-						isAnimating = false;
-						isShowing = true;
-						setBackgroundResource(R.color.transparent_dark);
-					}
-
-					@Override
-					public void onAnimationCancel(Animator animation) {
-
-					}
-				});
+		}).start();
 	}
+
+	private ViewPropertyAnimator getTranslationYAnimation(int endY) {
+		return animate().translationY(endY)
+				.setDuration(ANIMATION_DISTANCE_DURATION)
+				.setInterpolator(new AccelerateDecelerateInterpolator());
+	}
+
+	private ValueAnimator getBackgroundChangeAnimation(Integer startColor,
+			Integer endColor) {
+		ValueAnimator backgroundAnimation = ValueAnimator.ofObject(
+				new ArgbEvaluator(), startColor, endColor);
+		backgroundAnimation.setDuration(ANIMATION_BACKGROUND_DURATION);
+		backgroundAnimation.addUpdateListener(new AnimatorUpdateListener() {
+
+			@Override
+			public void onAnimationUpdate(ValueAnimator animator) {
+				setBackgroundColor((Integer) animator.getAnimatedValue());
+			}
+
+		});
+
+		return backgroundAnimation;
+	}
+
 }
