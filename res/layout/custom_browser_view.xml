@@ -29,6 +29,8 @@
             android:id="@+id/edit_text_website"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/hint_color_gray"
             android:layout_toLeftOf="@id/button_add_bookmark"
             android:hint="@string/edit_text_input_website"
             android:imeOptions="actionGo"

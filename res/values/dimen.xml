@@ -5,6 +5,8 @@
     
     <dimen name="margin_10">10dp</dimen>
     
+    <dimen name="margin_60">60dp</dimen>
+    
     <dimen name="item_view_bookmark_title_text_size">20sp</dimen>
     
     <dimen name="item_view_bookmark_website_text_size">15sp</dimen>
