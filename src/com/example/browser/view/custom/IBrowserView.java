@@ -22,6 +22,10 @@ public interface IBrowserView {
 	
 	public boolean canGoNextPage();
 	
+	public String getTitle();
+	
+	public String getWebsite();
+	
 	public void showBookmarkExist(Bookmark bookmark);
 	
 	public void showBookmarkAddSuccess();

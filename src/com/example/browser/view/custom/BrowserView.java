@@ -38,6 +38,11 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 
 	private final static int ANIMATION_DISTANCE = 80;
 	private boolean mIsWebsiteBarVisible = true;
+	
+	public BrowserView(Context context){
+		this(context,null);
+	}
+	
 
 	public BrowserView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -262,6 +267,19 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 	public void showBookmarkAddSuccess() {
 		Toast.makeText(getContext(), R.string.add_bookmark_success, Toast.LENGTH_SHORT).show();
 
+	}
+
+
+	@Override
+	public String getTitle() {
+		return mWebViewContent.getTitle();
+	}
+
+
+	@Override
+	public String getWebsite() {
+		// TODO Auto-generated method stub
+		return mWebViewContent.getUrl();
 	}
 
 }

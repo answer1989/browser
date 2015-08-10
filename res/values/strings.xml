@@ -17,5 +17,5 @@
     <string name="add_bookmark_success">Add bookmark success</string>
     <string name="title_activity_bookmark">BookmarkActivity</string>
     <string name="delete">delete</string>
-
+	<string name="new_tab">New Tab</string>
 </resources>
