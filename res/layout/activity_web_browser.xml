@@ -4,12 +4,12 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <LinearLayout
-        android:id="@+id/linear_layout_web_view_container"
+    <FrameLayout
+        android:id="@+id/frame_layout_web_view_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/linear_layout_bottom_bar"
-        android:orientation="vertical" />
+       />
 
     <com.example.browser.view.main.TabsView
         android:id="@+id/custom_tabs_view"

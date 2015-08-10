@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.example.browser.R;
@@ -23,7 +23,7 @@ public class MainActivity extends Activity implements OnClickListener, OnTabChan
 	private Button mButtonGoNextPage;
 	private Button mButtonAddBookMark;
 	private Button mButtonTab;
-	private LinearLayout mLinearLayoutWebViewContainer;
+	private FrameLayout mFrameLayoutWebViewContainer;
 	private TabsView mTabsView;
 	private List<BrowserView> mBrowserViews = new ArrayList<BrowserView>();
 	
@@ -51,7 +51,7 @@ public class MainActivity extends Activity implements OnClickListener, OnTabChan
 		mCurrentBrowserView = new BrowserView(this.getApplicationContext());
 		mBrowserViews.add(mCurrentBrowserView);
 		
-		mLinearLayoutWebViewContainer = (LinearLayout) findViewById(R.id.linear_layout_web_view_container);
+		mFrameLayoutWebViewContainer = (FrameLayout) findViewById(R.id.frame_layout_web_view_container);
 		showWebView(mCurrentBrowserView);
 				
 		mButtonGoPreviousPage = (Button) findViewById(R.id.button_go_previous_page);
@@ -124,8 +124,8 @@ public class MainActivity extends Activity implements OnClickListener, OnTabChan
 	
 	private void showWebView(BrowserView browserView){
 		mCurrentBrowserView = browserView;
-		mLinearLayoutWebViewContainer.removeAllViews();
-		mLinearLayoutWebViewContainer.addView(browserView);
+		mFrameLayoutWebViewContainer.removeAllViews();
+		mFrameLayoutWebViewContainer.addView(browserView);
 	}
 
 	@Override

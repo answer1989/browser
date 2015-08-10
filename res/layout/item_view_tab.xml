@@ -14,7 +14,7 @@
         android:layout_toLeftOf="@+id/button_close_tab"
         android:singleLine="true"
         android:textColor="@android:color/black"
-        android:textSize="15sp" />
+        android:textSize="@dimen/item_view_tab_title_text_size" />
 
     <TextView
         android:id="@+id/text_view_tab_website"
@@ -26,7 +26,7 @@
         android:layout_toLeftOf="@+id/button_close_tab"
         android:singleLine="true"
         android:textColor="@android:color/black"
-        android:textSize="10sp" />
+        android:textSize="@dimen/item_view_tab_website_text_size" />
 
     <Button
         android:id="@+id/button_close_tab"
