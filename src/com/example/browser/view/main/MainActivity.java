@@ -3,6 +3,7 @@ package com.example.browser.view.main;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.animation.LayoutTransition;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +17,8 @@ import com.example.browser.R;
 import com.example.browser.view.bookmark.BookmarkActivity;
 import com.example.browser.view.custom.BrowserView;
 
-public class MainActivity extends Activity implements OnClickListener, OnTabChangeListener{
+public class MainActivity extends Activity implements OnClickListener,
+		OnTabChangeListener {
 
 	private BrowserView mCurrentBrowserView;
 	private Button mButtonGoPreviousPage;
@@ -26,7 +28,7 @@ public class MainActivity extends Activity implements OnClickListener, OnTabChan
 	private FrameLayout mFrameLayoutWebViewContainer;
 	private TabsView mTabsView;
 	private List<BrowserView> mBrowserViews = new ArrayList<BrowserView>();
-	
+
 	private final static int MAX_TAB = 10;
 	private final static int OPEN_BOOKMARK_CODE = 0x1000;
 
@@ -50,15 +52,18 @@ public class MainActivity extends Activity implements OnClickListener, OnTabChan
 	private void initView() {
 		mCurrentBrowserView = new BrowserView(this.getApplicationContext());
 		mBrowserViews.add(mCurrentBrowserView);
-		
+
 		mFrameLayoutWebViewContainer = (FrameLayout) findViewById(R.id.frame_layout_web_view_container);
 		showWebView(mCurrentBrowserView);
-				
+
+		mFrameLayoutWebViewContainer
+				.setLayoutTransition(new LayoutTransition());
+
 		mButtonGoPreviousPage = (Button) findViewById(R.id.button_go_previous_page);
 		mButtonGoNextPage = (Button) findViewById(R.id.button_go_next_page);
 		mButtonAddBookMark = (Button) findViewById(R.id.button_go_bookmark);
 		mButtonTab = (Button) findViewById(R.id.button_tab);
-		mTabsView = (TabsView)findViewById(R.id.custom_tabs_view);
+		mTabsView = (TabsView) findViewById(R.id.custom_tabs_view);
 		mTabsView.setTabList(mBrowserViews);
 		mTabsView.setOnTabChangeListener(this);
 	}
@@ -81,7 +86,7 @@ public class MainActivity extends Activity implements OnClickListener, OnTabChan
 		case R.id.button_tab:
 			showTabList();
 			break;
-			
+
 		default:
 			break;
 		}
@@ -89,8 +94,9 @@ public class MainActivity extends Activity implements OnClickListener, OnTabChan
 	}
 
 	private void addNewTab() {
-		if(mBrowserViews.size() == MAX_TAB){
-			Toast.makeText(getApplicationContext(), "reach max tabs", Toast.LENGTH_SHORT).show();
+		if (mBrowserViews.size() == MAX_TAB) {
+			Toast.makeText(getApplicationContext(), "reach max tabs",
+					Toast.LENGTH_SHORT).show();
 		}
 		BrowserView browserView = new BrowserView(getApplicationContext());
 		mBrowserViews.add(browserView);
@@ -114,15 +120,15 @@ public class MainActivity extends Activity implements OnClickListener, OnTabChan
 	}
 
 	private void showTabList() {
-		if(mTabsView.isShowing()){
+		if (mTabsView.isShowing()) {
 			mTabsView.dismiss();
-		}else{
+		} else {
 			mTabsView.notifyDataSetChanged();
 			mTabsView.show();
 		}
 	}
-	
-	private void showWebView(BrowserView browserView){
+
+	private void showWebView(BrowserView browserView) {
 		mCurrentBrowserView = browserView;
 		mFrameLayoutWebViewContainer.removeAllViews();
 		mFrameLayoutWebViewContainer.addView(browserView);
@@ -130,36 +136,37 @@ public class MainActivity extends Activity implements OnClickListener, OnTabChan
 
 	@Override
 	public void onBackPressed() {
-		
-		if(mTabsView.isShowing()){
+
+		if (mTabsView.isShowing()) {
 			mTabsView.dismiss();
 			return;
 		}
-		
+
 		if (mCurrentBrowserView.canGoPreviousPage()) {
 			mCurrentBrowserView.goPreviousPage();
 		} else {
 			super.onBackPressed();
 		}
 	}
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if(requestCode == OPEN_BOOKMARK_CODE && resultCode == RESULT_OK){
-			String bookmark = data.getStringExtra(BookmarkActivity.OPEN_BOOK_MARK);
+		if (requestCode == OPEN_BOOKMARK_CODE && resultCode == RESULT_OK) {
+			String bookmark = data
+					.getStringExtra(BookmarkActivity.OPEN_BOOK_MARK);
 			mCurrentBrowserView.loadWebsite(bookmark);
 		}
 	}
 
 	@Override
 	public void onTabClose(int position) {
-		if(mBrowserViews.size() == 1){
+		if (mBrowserViews.size() == 1) {
 			mBrowserViews.remove(position);
 			BrowserView browserView = new BrowserView(getApplicationContext());
 			mBrowserViews.add(browserView);
 			showWebView(browserView);
-		}else{
+		} else {
 			mBrowserViews.remove(position);
 			showWebView(mBrowserViews.get(0));
 		}
@@ -170,7 +177,11 @@ public class MainActivity extends Activity implements OnClickListener, OnTabChan
 	@Override
 	public void onTabSelected(int position) {
 		mTabsView.dismiss();
-		showWebView(mBrowserViews.get(position));
+		BrowserView browserView = mBrowserViews.get(position);
+		if (mCurrentBrowserView != browserView) {
+			showWebView(mBrowserViews.get(position));
+		}
+
 	}
 
 	@Override
