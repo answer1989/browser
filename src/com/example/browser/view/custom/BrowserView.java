@@ -71,7 +71,6 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 
 	private void setUpWebView() {
 		mWebViewContent.getSettings().setJavaScriptEnabled(true);
-		mWebViewContent.getSettings().setBuiltInZoomControls(true);
 		mWebViewContent.setWebViewClient(new WebViewClient() {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
