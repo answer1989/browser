@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.animation.LayoutTransition;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -56,9 +57,8 @@ public class MainActivity extends Activity implements OnClickListener,
 		mFrameLayoutWebViewContainer = (FrameLayout) findViewById(R.id.frame_layout_web_view_container);
 		showWebView(mCurrentBrowserView);
 
-		mFrameLayoutWebViewContainer
-				.setLayoutTransition(new LayoutTransition());
-
+		setContainerLayoutTransition();
+		
 		mButtonGoPreviousPage = (Button) findViewById(R.id.button_go_previous_page);
 		mButtonGoNextPage = (Button) findViewById(R.id.button_go_next_page);
 		mButtonAddBookMark = (Button) findViewById(R.id.button_go_bookmark);
@@ -66,6 +66,19 @@ public class MainActivity extends Activity implements OnClickListener,
 		mTabsView = (TabsView) findViewById(R.id.custom_tabs_view);
 		mTabsView.setTabList(mBrowserViews);
 		mTabsView.setOnTabChangeListener(this);
+	}
+
+	private void setContainerLayoutTransition() {
+		LayoutTransition transition = new LayoutTransition();
+		ObjectAnimator enterAnimator = ObjectAnimator.ofFloat(null, View.ALPHA, 0, 1);
+		ObjectAnimator exitAnimator = ObjectAnimator.ofFloat(null, View.ALPHA, 1, 0);
+
+		transition.setAnimator(LayoutTransition.APPEARING, enterAnimator);
+		transition.setAnimator(LayoutTransition.DISAPPEARING, exitAnimator);
+
+		transition.setDuration(200);
+
+		mFrameLayoutWebViewContainer.setLayoutTransition(transition);
 	}
 
 	@Override
