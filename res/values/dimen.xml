@@ -9,7 +9,8 @@
     <dimen name="item_view_tab_title_text_size">20sp</dimen>
     <dimen name="item_view_tab_website_text_size">15sp</dimen>
     <dimen name="search_bar_icon_size">36dp</dimen>
-    <dimen name="padding_5">8dp</dimen>
+    <dimen name="padding_5">5dp</dimen>
     <dimen name="tab_bar_icon_size">36dp</dimen>
-
+	<dimen name="text_size_16">16sp</dimen>
+	<dimen name="divider_height">0.5dp</dimen>
 </resources>

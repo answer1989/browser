@@ -22,19 +22,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:paddingTop="@dimen/padding_5"
-        android:paddingBottom="@dimen/padding_5"
-        android:baselineAligned="false"
         android:background="@color/color_gray"
+        android:baselineAligned="false"
         android:orientation="horizontal" >
 
         <RelativeLayout
+            android:id="@+id/button_go_previous_page"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:background="@drawable/bg_tab"
+            android:paddingBottom="@dimen/padding_5"
+            android:paddingTop="@dimen/padding_5" >
 
-            <Button
-                android:id="@+id/button_go_previous_page"
+            <View
                 android:layout_width="@dimen/tab_bar_icon_size"
                 android:layout_height="@dimen/tab_bar_icon_size"
                 android:layout_centerInParent="true"
@@ -42,12 +43,15 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/button_go_next_page"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:background="@drawable/bg_tab"
+            android:paddingBottom="@dimen/padding_5"
+            android:paddingTop="@dimen/padding_5" >
 
-            <Button
-                android:id="@+id/button_go_next_page"
+            <View
                 android:layout_width="@dimen/tab_bar_icon_size"
                 android:layout_height="@dimen/tab_bar_icon_size"
                 android:layout_centerInParent="true"
@@ -55,12 +59,15 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/button_go_bookmark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:background="@drawable/bg_tab"
+            android:paddingBottom="@dimen/padding_5"
+            android:paddingTop="@dimen/padding_5" >
 
-            <Button
-                android:id="@+id/button_go_bookmark"
+            <View
                 android:layout_width="@dimen/tab_bar_icon_size"
                 android:layout_height="@dimen/tab_bar_icon_size"
                 android:layout_centerInParent="true"
@@ -68,12 +75,15 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/button_tab"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:background="@drawable/bg_tab"
+            android:paddingBottom="@dimen/padding_5"
+            android:paddingTop="@dimen/padding_5" >
 
-            <Button
-                android:id="@+id/button_tab"
+            <View
                 android:layout_width="@dimen/tab_bar_icon_size"
                 android:layout_height="@dimen/tab_bar_icon_size"
                 android:layout_centerInParent="true"
