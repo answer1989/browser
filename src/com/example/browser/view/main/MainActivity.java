@@ -52,7 +52,7 @@ public class MainActivity extends Activity implements OnClickListener,
 	}
 
 	private void initView() {
-		mCurrentBrowserView = new BrowserView(this.getApplicationContext());
+		mCurrentBrowserView = new BrowserView(this);
 		mBrowserViews.add(mCurrentBrowserView);
 
 		mFrameLayoutWebViewContainer = (FrameLayout) findViewById(R.id.frame_layout_web_view_container);
