@@ -59,7 +59,7 @@ public class MainActivity extends Activity implements OnClickListener,
 		showWebView(mCurrentBrowserView);
 
 		setContainerLayoutTransition();
-		
+
 		mButtonGoPreviousPage = (RelativeLayout) findViewById(R.id.button_go_previous_page);
 		mButtonGoNextPage = (RelativeLayout) findViewById(R.id.button_go_next_page);
 		mButtonAddBookMark = (RelativeLayout) findViewById(R.id.button_go_bookmark);
@@ -71,8 +71,10 @@ public class MainActivity extends Activity implements OnClickListener,
 
 	private void setContainerLayoutTransition() {
 		LayoutTransition transition = new LayoutTransition();
-		ObjectAnimator enterAnimator = ObjectAnimator.ofFloat(null, View.ALPHA, 0, 1);
-		ObjectAnimator exitAnimator = ObjectAnimator.ofFloat(null, View.ALPHA, 1, 0);
+		ObjectAnimator enterAnimator = ObjectAnimator.ofFloat(null, View.ALPHA,
+				0, 1);
+		ObjectAnimator exitAnimator = ObjectAnimator.ofFloat(null, View.ALPHA,
+				1, 0);
 
 		transition.setAnimator(LayoutTransition.APPEARING, enterAnimator);
 		transition.setAnimator(LayoutTransition.DISAPPEARING, exitAnimator);

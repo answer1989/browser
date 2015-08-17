@@ -4,11 +4,58 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <ListView 
+    <RelativeLayout
+        android:id="@+id/relative_layout_bookmark_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_dark_gray"
+        android:paddingBottom="@dimen/padding_10"
+        android:paddingLeft="@dimen/padding_10"
+        android:paddingTop="@dimen/padding_10" >
+
+        <Button
+            android:id="@+id/button_go_back"
+            android:layout_width="@dimen/nav_back_icon_size"
+            android:layout_height="@dimen/nav_back_icon_size"
+            android:background="@drawable/ic_arrow_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_toRightOf="@id/button_go_back"
+            android:text="@string/title_bookmark"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_20" />
+    </RelativeLayout>
+
+    <ListView
         android:id="@+id/list_view_bookmark"
-        android:layout_width="match_parent" 
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:descendantFocusability="blocksDescendants"
-        ></ListView>
+        android:layout_below="@id/relative_layout_bookmark_bar"
+        android:descendantFocusability="blocksDescendants" />
+
+    <LinearLayout
+        android:id="@+id/linear_empty_bookmark_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_star_empty" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/empty_bookmark" />
+    </LinearLayout>
 
 </RelativeLayout>

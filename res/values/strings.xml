@@ -19,4 +19,6 @@
     <string name="delete">delete</string>
 	<string name="new_tab">New Tab</string>
 	<string name="default_website_title">Browser</string>
+	<string name="title_bookmark">Bookmark</string>
+	<string name="empty_bookmark">Bookmark is empty</string>
 </resources>
