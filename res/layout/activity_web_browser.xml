@@ -8,53 +8,77 @@
         android:id="@+id/frame_layout_web_view_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/linear_layout_bottom_bar"
-       />
+        android:layout_above="@+id/linear_layout_bottom_bar" />
 
     <com.example.browser.view.main.TabsView
         android:id="@+id/custom_tabs_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/linear_layout_bottom_bar"
-        android:visibility="gone"
-     />
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/linear_layout_bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal" 
-        android:background="@android:color/white"
-        >
+        android:paddingTop="@dimen/padding_5"
+        android:paddingBottom="@dimen/padding_5"
+        android:baselineAligned="false"
+        android:background="@color/color_gray"
+        android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/button_go_previous_page"
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/button_text_previous" />
+            android:layout_weight="1" >
 
-        <Button
-            android:id="@+id/button_go_next_page"
+            <Button
+                android:id="@+id/button_go_previous_page"
+                android:layout_width="@dimen/tab_bar_icon_size"
+                android:layout_height="@dimen/tab_bar_icon_size"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_tab_nav_left" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/button_text_next" />
+            android:layout_weight="1" >
 
-        <Button
-            android:id="@+id/button_go_bookmark"
+            <Button
+                android:id="@+id/button_go_next_page"
+                android:layout_width="@dimen/tab_bar_icon_size"
+                android:layout_height="@dimen/tab_bar_icon_size"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_tab_nav_right" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/button_text_bookmark" />
+            android:layout_weight="1" >
 
-        <Button
-            android:id="@+id/button_tab"
+            <Button
+                android:id="@+id/button_go_bookmark"
+                android:layout_width="@dimen/tab_bar_icon_size"
+                android:layout_height="@dimen/tab_bar_icon_size"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_tab_bookmark" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/button_text_new_tab" />
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/button_tab"
+                android:layout_width="@dimen/tab_bar_icon_size"
+                android:layout_height="@dimen/tab_bar_icon_size"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_tab_tabs" />
+        </RelativeLayout>
     </LinearLayout>
 
 </RelativeLayout>
