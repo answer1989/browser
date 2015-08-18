@@ -1,5 +1,7 @@
 package com.example.browser.view.custom;
 
+import android.animation.Animator;
+import android.animation.Animator.AnimatorListener;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.app.AlertDialog;
@@ -9,6 +11,7 @@ import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.webkit.WebChromeClient;
@@ -38,6 +41,7 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 
 	private final static int ANIMATION_DISTANCE = 80;
 	private boolean mIsWebsiteBarVisible = true;
+	private boolean mIsAnimating = false;
 	private AlertDialog mAlertDialogExistBookmark;
 
 	public BrowserView(Context context) {
@@ -184,7 +188,39 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 			}
 		});
 
+		varl.addListener(new AnimatorListener() {
+
+			@Override
+			public void onAnimationStart(Animator animation) {
+				mIsAnimating = true;
+			}
+
+			@Override
+			public void onAnimationRepeat(Animator animation) {
+
+			}
+
+			@Override
+			public void onAnimationEnd(Animator animation) {
+				mIsAnimating = false;
+			}
+
+			@Override
+			public void onAnimationCancel(Animator animation) {
+
+			}
+		});
+
 		return varl;
+	}
+
+	@Override
+	public boolean onInterceptTouchEvent(MotionEvent ev) {
+		if (mIsAnimating && mIsWebsiteBarVisible) {
+			return true;
+		} else {
+			return super.onInterceptTouchEvent(ev);
+		}
 	}
 
 	private void setUpButton() {

@@ -1,6 +1,7 @@
 package com.example.browser.view.custom;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.webkit.WebView;
 
@@ -55,4 +56,5 @@ public class CustomWebView extends WebView {
 		mOnScrollChangeListener.onScrollChange(this, l, t, oldl, oldt);
 
 	}
+
 }

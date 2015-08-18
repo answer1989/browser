@@ -13,31 +13,29 @@
             android:id="@+id/button_refresh_website"
             android:layout_width="@dimen/search_bar_icon_size"
             android:layout_height="@dimen/search_bar_icon_size"
-            android:background="@drawable/ic_refresh"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            />
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_refresh" />
 
         <Button
             android:id="@+id/button_add_bookmark"
             android:layout_width="@dimen/search_bar_icon_size"
             android:layout_height="@dimen/search_bar_icon_size"
-           android:background="@drawable/ic_star"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/button_refresh_website"
-             />
+            android:background="@drawable/ic_star" />
 
         <EditText
             android:id="@+id/edit_text_website"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/hint_color_gray"
             android:layout_toLeftOf="@id/button_add_bookmark"
             android:hint="@string/edit_text_input_website"
             android:imeOptions="actionGo"
             android:inputType="textNoSuggestions"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/hint_color_gray" />
     </RelativeLayout>
 
     <com.example.browser.view.custom.ProgressBarView
