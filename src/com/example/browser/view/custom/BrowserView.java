@@ -143,6 +143,22 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 
 			}
 
+			@Override
+			public void onScrollToEnd(WebView webView) {
+				if (!mIsWebsiteBarVisible) {
+					mIsWebsiteBarVisible = true;
+					animateShowWebsiteBar();
+				}
+			}
+
+			@Override
+			public void onScrollToTop(WebView webview) {
+				if (!mIsWebsiteBarVisible) {
+					mIsWebsiteBarVisible = true;
+					animateShowWebsiteBar();
+				}
+			}
+
 		});
 	}
 
