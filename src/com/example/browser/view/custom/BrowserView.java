@@ -8,6 +8,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -17,8 +19,11 @@ import android.view.inputmethod.EditorInfo;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
@@ -31,7 +36,9 @@ import com.example.browser.util.Utils;
 
 public class BrowserView extends RelativeLayout implements IBrowserView {
 
-	private EditText mEdittextWebsite;
+	private EditText mEditTextWebsite;
+	private ListView mListViewCompleteContent;
+	private WebsiteAutoCompleteAdapter mWebsiteAutoCompleteAdapter;
 	private Button mButtonRefreshWebsite;
 	private Button mButtonAddBookMark;
 	private CustomWebView mWebViewContent;
@@ -65,7 +72,76 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 	}
 
 	private void initView() {
-		mEdittextWebsite = (EditText) findViewById(R.id.edit_text_website);
+		mEditTextWebsite = (EditText) findViewById(R.id.edit_text_website);
+
+		mEditTextWebsite.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				mListViewCompleteContent.setVisibility(VISIBLE);
+				mWebViewContent.setVisibility(INVISIBLE);
+			}
+		});
+
+		mEditTextWebsite.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				mWebsiteAutoCompleteAdapter.updateCompleteContent(s.toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+
+			}
+		});
+
+		mEditTextWebsite.setOnKeyListener(new OnKeyListener() {
+
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				if (keyCode == KeyEvent.KEYCODE_BACK) {
+					if (mListViewCompleteContent.getVisibility() == VISIBLE) {
+						mListViewCompleteContent.setVisibility(INVISIBLE);
+						mWebViewContent.setVisibility(VISIBLE);
+						return true;
+					}
+				}
+				return false;
+			}
+		});
+
+		mListViewCompleteContent = (ListView) findViewById(R.id.list_view_show_complete_content);
+		mWebsiteAutoCompleteAdapter = new WebsiteAutoCompleteAdapter(
+				getContext());
+		
+		mWebsiteAutoCompleteAdapter.setOnWebsiteDoneClickListener(new OnWebsiteDoneClickListener() {
+			
+			@Override
+			public void onWebsiteDoneClick(String website) {
+				mEditTextWebsite.setText(website);
+			}
+		});
+		
+		mListViewCompleteContent.setAdapter(mWebsiteAutoCompleteAdapter);
+		
+		mListViewCompleteContent.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				loadWebsite(mWebsiteAutoCompleteAdapter.getItem(position));
+				mListViewCompleteContent.setVisibility(INVISIBLE);
+				mWebViewContent.setVisibility(VISIBLE);
+			}
+		});
 		mButtonRefreshWebsite = (Button) findViewById(R.id.button_refresh_website);
 		mButtonAddBookMark = (Button) findViewById(R.id.button_add_bookmark);
 		mWebViewContent = (CustomWebView) findViewById(R.id.web_view_content);
@@ -117,7 +193,7 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 			public void onPageStarted(WebView view, String url, Bitmap favicon) {
 				// TODO Auto-generated method stub
 				super.onPageStarted(view, url, favicon);
-				mEdittextWebsite.setText(url);
+				mEditTextWebsite.setText(url);
 			}
 		});
 
@@ -229,7 +305,7 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 
 			@Override
 			public void onClick(View v) {
-				mBrowserPresenter.reloadWebsite(mEdittextWebsite.getText()
+				mBrowserPresenter.reloadWebsite(mEditTextWebsite.getText()
 						.toString());
 			}
 		});
@@ -247,7 +323,7 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 
 	private void setUpWebsiteEditText() {
 
-		mEdittextWebsite
+		mEditTextWebsite
 				.setOnEditorActionListener(new OnEditorActionListener() {
 
 					@Override
@@ -255,7 +331,9 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 							KeyEvent event) {
 						if (actionId == EditorInfo.IME_ACTION_GO) {
 							Utils.hideKeyBoard(getWindowToken(), getContext());
-							mBrowserPresenter.loadWebsite(mEdittextWebsite
+							mListViewCompleteContent.setVisibility(INVISIBLE);
+							mWebViewContent.setVisibility(VISIBLE);
+							mBrowserPresenter.loadWebsite(mEditTextWebsite
 									.getText().toString());
 							return true;
 						}

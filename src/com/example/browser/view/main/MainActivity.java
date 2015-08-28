@@ -114,7 +114,7 @@ public class MainActivity extends Activity implements OnClickListener,
 			Toast.makeText(getApplicationContext(), "reach max tabs",
 					Toast.LENGTH_SHORT).show();
 		}
-		BrowserView browserView = new BrowserView(getApplicationContext());
+		BrowserView browserView = new BrowserView(this);
 		mBrowserViews.add(browserView);
 		mTabsView.notifyDataSetChanged();
 		showWebView(browserView);

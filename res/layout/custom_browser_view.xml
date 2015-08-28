@@ -35,7 +35,8 @@
             android:inputType="textNoSuggestions"
             android:singleLine="true"
             android:textColor="@android:color/black"
-            android:textColorHint="@color/hint_color_gray" />
+            android:textColorHint="@color/hint_color_gray"
+             />
     </RelativeLayout>
 
     <com.example.browser.view.custom.ProgressBarView
@@ -49,7 +50,16 @@
     <com.example.browser.view.custom.CustomWebView
         android:id="@+id/web_view_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/progress_bar_view" />
+    
+    <ListView
+        android:id="@+id/list_view_show_complete_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/progress_bar_view" 
+        android:descendantFocusability="blocksDescendants"
+        android:visibility="invisible"
+        />
 
 </RelativeLayout>

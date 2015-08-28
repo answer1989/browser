@@ -2,9 +2,9 @@ package com.example.browser.util;
 
 import org.apache.commons.validator.routines.UrlValidator;
 
-
 import android.content.Context;
 import android.os.IBinder;
+import android.util.DisplayMetrics;
 import android.view.inputmethod.InputMethodManager;
 
 public class Utils {
@@ -23,4 +23,10 @@ public class Utils {
 	public static String getBaiduSearchString(String keyword) {
 		return "https://www.baidu.com/s?wd=" + keyword;
 	}
+
+	public static int getScreenWidth(Context context) {
+		DisplayMetrics dm = context.getApplicationContext().getResources().getDisplayMetrics();
+		return dm.widthPixels; // ÆÁÄ»¿í£¨ÏñËØ£¬Èç£º480px£©
+	}
+
 }
