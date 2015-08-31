@@ -8,7 +8,6 @@ import com.example.browser.model.bean.Bookmark;
 import com.example.browser.util.Utils;
 import com.example.browser.view.custom.IBrowserView;
 
-
 import android.text.TextUtils;
 
 public class BrowserPresenter {
@@ -21,7 +20,7 @@ public class BrowserPresenter {
 		mBookmarkModel = new BookmarkModel();
 	}
 
-	public void loadWebsite(String website) {
+	public void loadWebsite(String website, String otherWebstie) {
 		if (TextUtils.isEmpty(website)) {
 			return;
 		}
@@ -29,7 +28,7 @@ public class BrowserPresenter {
 		website = website.toLowerCase(Locale.US);
 
 		if (!Utils.isValidWebsite(website)) {
-			website = Utils.getBaiduSearchString(website);
+			website = otherWebstie;
 		}
 
 		mBrowserView.loadWebsite(website);

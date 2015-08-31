@@ -13,11 +13,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.browser.R;
+import com.example.browser.util.AutoCompleteWebsiteUtils;
 
 public class WebsiteAutoCompleteAdapter extends BaseAdapter {
 
 	private List<String> mWebsiteList = new ArrayList<String>();
 	private LayoutInflater mLayoutInflater;
+	private AutoCompleteWebsiteUtils mAutoCompleteWebsiteUtils;
 	private OnWebsiteDoneClickListener mOnWebsiteDoneClickListener = new OnWebsiteDoneClickListener() {
 
 		@Override
@@ -28,6 +30,7 @@ public class WebsiteAutoCompleteAdapter extends BaseAdapter {
 
 	public WebsiteAutoCompleteAdapter(Context context) {
 		mLayoutInflater = LayoutInflater.from(context);
+		mAutoCompleteWebsiteUtils = new AutoCompleteWebsiteUtils();
 	}
 
 	@Override
@@ -70,21 +73,19 @@ public class WebsiteAutoCompleteAdapter extends BaseAdapter {
 						.get(position));
 			}
 		});
-		
-		if(position == mWebsiteList.size() - 1){
+
+		if (position == mWebsiteList.size() - 1) {
 			viewHolder.mButtonDone.setVisibility(View.INVISIBLE);
-		}else{
+		} else {
 			viewHolder.mButtonDone.setVisibility(View.VISIBLE);
 		}
-		
+
 		return convertView;
 	}
 
 	public void updateCompleteContent(String keyword) {
-		mWebsiteList.clear();
-		mWebsiteList.add("http://" + keyword + ".com");
-		mWebsiteList.add("https://" + keyword + ".com");
-		mWebsiteList.add("search: " + keyword);
+		mWebsiteList = mAutoCompleteWebsiteUtils
+				.getAutoCompleteWebsite(keyword);
 		notifyDataSetChanged();
 	}
 

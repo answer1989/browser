@@ -121,27 +121,31 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 		mListViewCompleteContent = (ListView) findViewById(R.id.list_view_show_complete_content);
 		mWebsiteAutoCompleteAdapter = new WebsiteAutoCompleteAdapter(
 				getContext());
-		
-		mWebsiteAutoCompleteAdapter.setOnWebsiteDoneClickListener(new OnWebsiteDoneClickListener() {
-			
-			@Override
-			public void onWebsiteDoneClick(String website) {
-				mEditTextWebsite.setText(website);
-			}
-		});
-		
-		mListViewCompleteContent.setAdapter(mWebsiteAutoCompleteAdapter);
-		
-		mListViewCompleteContent.setOnItemClickListener(new OnItemClickListener() {
 
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				loadWebsite(mWebsiteAutoCompleteAdapter.getItem(position));
-				mListViewCompleteContent.setVisibility(INVISIBLE);
-				mWebViewContent.setVisibility(VISIBLE);
-			}
-		});
+		mWebsiteAutoCompleteAdapter
+				.setOnWebsiteDoneClickListener(new OnWebsiteDoneClickListener() {
+
+					@Override
+					public void onWebsiteDoneClick(String website) {
+						mEditTextWebsite.setText(website);
+					}
+				});
+
+		mListViewCompleteContent.setAdapter(mWebsiteAutoCompleteAdapter);
+
+		mListViewCompleteContent
+				.setOnItemClickListener(new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+						loadWebsite(mWebsiteAutoCompleteAdapter
+								.getItem(position));
+						Utils.hideKeyBoard(getWindowToken(), getContext());
+						mListViewCompleteContent.setVisibility(INVISIBLE);
+						mWebViewContent.setVisibility(VISIBLE);
+					}
+				});
 		mButtonRefreshWebsite = (Button) findViewById(R.id.button_refresh_website);
 		mButtonAddBookMark = (Button) findViewById(R.id.button_add_bookmark);
 		mWebViewContent = (CustomWebView) findViewById(R.id.web_view_content);
@@ -334,7 +338,7 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 							mListViewCompleteContent.setVisibility(INVISIBLE);
 							mWebViewContent.setVisibility(VISIBLE);
 							mBrowserPresenter.loadWebsite(mEditTextWebsite
-									.getText().toString());
+									.getText().toString(),mWebsiteAutoCompleteAdapter.getItem(0));
 							return true;
 						}
 						return false;
@@ -410,7 +414,6 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 
 	@Override
 	public String getWebsite() {
-		// TODO Auto-generated method stub
 		return mWebViewContent.getUrl();
 	}
 
