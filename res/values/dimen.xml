@@ -17,4 +17,6 @@
 	<dimen name="text_size_16">16sp</dimen>
 	<dimen name="text_size_20">20sp</dimen>
 	<dimen name="divider_height">0.5dp</dimen>
+	<dimen name="icon_done_size">30dp</dimen>
+	<dimen name="margin_20">20dp</dimen>
 </resources>
