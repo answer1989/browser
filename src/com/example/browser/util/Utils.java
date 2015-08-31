@@ -1,12 +1,9 @@
 package com.example.browser.util;
 
-import java.util.List;
-
 import org.apache.commons.validator.routines.UrlValidator;
 
 import android.content.Context;
 import android.os.IBinder;
-import android.util.DisplayMetrics;
 import android.view.inputmethod.InputMethodManager;
 
 public class Utils {
@@ -22,8 +19,6 @@ public class Utils {
 		return urlValidator.isValid(url);
 	}
 
-	public static String getBaiduSearchString(String keyword) {
-		return "https://www.baidu.com/s?wd=" + keyword;
-	}
+	
 
 }
