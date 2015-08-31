@@ -46,10 +46,11 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 	private BrowserPresenter mBrowserPresenter;
 	private RelativeLayout mRelativeLayoutWebsiteBar;
 
-	private final static int ANIMATION_DISTANCE = 80;
 	private boolean mIsWebsiteBarVisible = true;
 	private boolean mIsAnimating = false;
 	private AlertDialog mAlertDialogExistBookmark;
+	private final static int ANIMATION_DISTANCE = 80;
+	private final static String FIRST_WEB_PAGE = "http://m.sm.cn";
 
 	public BrowserView(Context context) {
 		this(context, null);
@@ -244,6 +245,8 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 			}
 
 		});
+
+		mWebViewContent.loadUrl(FIRST_WEB_PAGE);
 	}
 
 	protected void animateShowWebsiteBar() {
@@ -338,7 +341,8 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 							mListViewCompleteContent.setVisibility(INVISIBLE);
 							mWebViewContent.setVisibility(VISIBLE);
 							mBrowserPresenter.loadWebsite(mEditTextWebsite
-									.getText().toString(),mWebsiteAutoCompleteAdapter.getItem(0));
+									.getText().toString(),
+									mWebsiteAutoCompleteAdapter.getItem(0));
 							return true;
 						}
 						return false;
