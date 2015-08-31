@@ -28,7 +28,11 @@ public class BrowserPresenter {
 		website = website.toLowerCase(Locale.US);
 
 		if (!Utils.isValidWebsite(website)) {
-			website = otherWebstie;
+			if (Utils.isChinese(website)) {
+				website = Utils.getBaiduSearchString(website);
+			} else {
+				website = otherWebstie;
+			}
 		}
 
 		mBrowserView.loadWebsite(website);

@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
@@ -45,12 +46,12 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 	private ProgressBarView mProgressBarView;
 	private BrowserPresenter mBrowserPresenter;
 	private RelativeLayout mRelativeLayoutWebsiteBar;
-
+	private Button mButtonClearInput;
 	private boolean mIsWebsiteBarVisible = true;
 	private boolean mIsAnimating = false;
 	private AlertDialog mAlertDialogExistBookmark;
 	private final static int ANIMATION_DISTANCE = 80;
-	private final static String FIRST_WEB_PAGE = "http://m.sm.cn";
+	private final static String FIRST_WEB_PAGE = "https://baidu.com";
 
 	public BrowserView(Context context) {
 		this(context, null);
@@ -65,6 +66,8 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 
 		setUpWebsiteEditText();
 
+		setUpAutoCompleteWebsiteList();
+
 		setUpButton();
 
 		setUpWebView();
@@ -74,79 +77,8 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 
 	private void initView() {
 		mEditTextWebsite = (EditText) findViewById(R.id.edit_text_website);
-
-		mEditTextWebsite.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				mListViewCompleteContent.setVisibility(VISIBLE);
-				mWebViewContent.setVisibility(INVISIBLE);
-			}
-		});
-
-		mEditTextWebsite.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				mWebsiteAutoCompleteAdapter.updateCompleteContent(s.toString());
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-
-			}
-		});
-
-		mEditTextWebsite.setOnKeyListener(new OnKeyListener() {
-
-			@Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
-				if (keyCode == KeyEvent.KEYCODE_BACK) {
-					if (mListViewCompleteContent.getVisibility() == VISIBLE) {
-						mListViewCompleteContent.setVisibility(INVISIBLE);
-						mWebViewContent.setVisibility(VISIBLE);
-						return true;
-					}
-				}
-				return false;
-			}
-		});
-
+		mButtonClearInput = (Button) findViewById(R.id.button_clear_input);
 		mListViewCompleteContent = (ListView) findViewById(R.id.list_view_show_complete_content);
-		mWebsiteAutoCompleteAdapter = new WebsiteAutoCompleteAdapter(
-				getContext());
-
-		mWebsiteAutoCompleteAdapter
-				.setOnWebsiteDoneClickListener(new OnWebsiteDoneClickListener() {
-
-					@Override
-					public void onWebsiteDoneClick(String website) {
-						mEditTextWebsite.setText(website);
-					}
-				});
-
-		mListViewCompleteContent.setAdapter(mWebsiteAutoCompleteAdapter);
-
-		mListViewCompleteContent
-				.setOnItemClickListener(new OnItemClickListener() {
-
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view,
-							int position, long id) {
-						loadWebsite(mWebsiteAutoCompleteAdapter
-								.getItem(position));
-						Utils.hideKeyBoard(getWindowToken(), getContext());
-						mListViewCompleteContent.setVisibility(INVISIBLE);
-						mWebViewContent.setVisibility(VISIBLE);
-					}
-				});
 		mButtonRefreshWebsite = (Button) findViewById(R.id.button_refresh_website);
 		mButtonAddBookMark = (Button) findViewById(R.id.button_add_bookmark);
 		mWebViewContent = (CustomWebView) findViewById(R.id.web_view_content);
@@ -307,7 +239,13 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 	}
 
 	private void setUpButton() {
+		mButtonClearInput.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				mEditTextWebsite.setText("");
+			}
+		});
 		mButtonRefreshWebsite.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -349,6 +287,86 @@ public class BrowserView extends RelativeLayout implements IBrowserView {
 					}
 				});
 
+		mEditTextWebsite.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				mListViewCompleteContent.setVisibility(VISIBLE);
+				mWebViewContent.setVisibility(INVISIBLE);
+			}
+		});
+
+		mEditTextWebsite.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+
+				if (TextUtils.isEmpty(s)) {
+					mButtonClearInput.setVisibility(INVISIBLE);
+				} else {
+					mButtonClearInput.setVisibility(VISIBLE);
+				}
+
+				mWebsiteAutoCompleteAdapter.updateCompleteContent(s.toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+
+			}
+		});
+
+		mEditTextWebsite.setOnKeyListener(new OnKeyListener() {
+
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				if (keyCode == KeyEvent.KEYCODE_BACK) {
+					if (mListViewCompleteContent.getVisibility() == VISIBLE) {
+						mListViewCompleteContent.setVisibility(INVISIBLE);
+						mWebViewContent.setVisibility(VISIBLE);
+						return true;
+					}
+				}
+				return false;
+			}
+		});
+
+	}
+
+	private void setUpAutoCompleteWebsiteList() {
+		mWebsiteAutoCompleteAdapter = new WebsiteAutoCompleteAdapter(
+				getContext());
+
+		mWebsiteAutoCompleteAdapter
+				.setOnWebsiteDoneClickListener(new OnWebsiteDoneClickListener() {
+
+					@Override
+					public void onWebsiteDoneClick(String website) {
+						mEditTextWebsite.setText(website);
+					}
+				});
+
+		mListViewCompleteContent.setAdapter(mWebsiteAutoCompleteAdapter);
+		mListViewCompleteContent
+				.setOnItemClickListener(new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+						loadWebsite(mWebsiteAutoCompleteAdapter
+								.getItem(position));
+						Utils.hideKeyBoard(getWindowToken(), getContext());
+						mListViewCompleteContent.setVisibility(INVISIBLE);
+						mWebViewContent.setVisibility(VISIBLE);
+					}
+				});
 	}
 
 	@Override

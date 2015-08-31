@@ -9,13 +9,12 @@ public class AutoCompleteWebsiteUtils {
 	private final static String HTTP_PREFIX = "http://";
 	private final static String HTTPS_PREFIX = "https://";
 	private final static String COM_SUFFIX = ".com";
-	private final static String BAIDU_SEARCH_PREFIX = "https://www.baidu.com/s?wd=";
 
 	public List<String> getAutoCompleteWebsite(String keyWord) {
 		mWebsiteListe.clear();
 		mWebsiteListe.add(0, getHttpItem(keyWord));
 		mWebsiteListe.add(1, getHttpsItem(keyWord));
-		mWebsiteListe.add(2, getBaiduSearchString(keyWord));
+		mWebsiteListe.add(2, Utils.getBaiduSearchString(keyWord));
 		return mWebsiteListe;
 	}
 
@@ -61,9 +60,5 @@ public class AutoCompleteWebsiteUtils {
 				return HTTPS_PREFIX + keyWord + COM_SUFFIX;
 			}
 		}
-	}
-
-	public String getBaiduSearchString(String keyword) {
-		return BAIDU_SEARCH_PREFIX + keyword;
 	}
 }

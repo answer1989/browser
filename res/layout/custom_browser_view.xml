@@ -33,10 +33,21 @@
             android:hint="@string/edit_text_input_website"
             android:imeOptions="actionGo"
             android:inputType="textNoSuggestions"
+            android:paddingRight="@dimen/padding_30"
             android:singleLine="true"
             android:textColor="@android:color/black"
-            android:textColorHint="@color/hint_color_gray"
-             />
+            android:textColorHint="@color/hint_color_gray" />
+
+        <Button
+            android:id="@+id/button_clear_input"
+            android:layout_width="@dimen/icon_clear_input_size"
+            android:layout_height="@dimen/icon_clear_input_size"
+            android:layout_alignRight="@id/edit_text_website"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin_10"
+            android:background="@drawable/ic_close_circle_black" 
+            android:visibility="invisible"
+            />
     </RelativeLayout>
 
     <com.example.browser.view.custom.ProgressBarView
@@ -52,14 +63,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/progress_bar_view" />
-    
+
     <ListView
         android:id="@+id/list_view_show_complete_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/progress_bar_view" 
+        android:layout_below="@id/progress_bar_view"
         android:descendantFocusability="blocksDescendants"
-        android:visibility="invisible"
-        />
+        android:visibility="invisible" />
 
 </RelativeLayout>
